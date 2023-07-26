@@ -1,3 +1,4 @@
+using CodeBase.Logic.Ability;
 using UnityEngine;
 
 namespace CodeBase.Logic.Player
@@ -9,63 +10,31 @@ namespace CodeBase.Logic.Player
         [SerializeField] private int _jumpForce = 300;
         [SerializeField] public float _lineDistance = 3f;
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private Transform _groundCheck;
+        [SerializeField] private SuperJumpAbility _superJumpAbility;
 
-        private LayerMask _groundMask;
-        private Collider[] _collisions = new Collider[1];
         private float _positionZ;
-        private float _cleavage = 0.1f;
-        private int _currentLine = 1;
 
-        private void Awake() =>
-            _groundMask = 1 << LayerMask.NameToLayer("Ground");
-
-        private void Update()
-        {
-            Move();
-            CheckGround();
-        }
-
-        private void Move()
-        {
-            if (Input.GetKeyDown(KeyCode.A) && _currentLine < 2)
-            {
-                _currentLine++;
-                ChangeLine();
-            }
-
-            if (Input.GetKeyDown(KeyCode.D) && _currentLine > 0)
-            {
-                _currentLine--;
-                ChangeLine();
-            }
-
-            if (Input.GetKeyUp(KeyCode.Space) && CheckGround())
-                _rigidbody.AddForce(0, _jumpForce, 0);
-
-            OnMove();
-        }
-
-        private void ChangeLine()
-        {
-            transform.position = 
-                new Vector3( transform.position.x, transform.position.y, (_currentLine - 1) * _lineDistance);
-        }
-
-        private void OnMove()
+        public void Move()
         {
             Vector3 direction = new Vector3(1, 0, 0);
             float scaledSpeed = _moveSpeed * Time.deltaTime;
 
-            transform.position = 
+            transform.position =
                 Vector3.Lerp(transform.position, transform.position + direction, scaledSpeed);
         }
 
-        private bool CheckGround()
+        public void Jump()
         {
-            int size = Physics.OverlapSphereNonAlloc(_groundCheck.position, _cleavage, _collisions, _groundMask);
+            if (_superJumpAbility.IsActive)
+                _rigidbody.AddForce(0, _jumpForce * 2, 0);
 
-            return size > 0;
+            _rigidbody.AddForce(0, _jumpForce, 0);
+        }
+
+        public void ChangeLine(int _currentLine)
+        {
+            transform.position =
+                new Vector3(transform.position.x, transform.position.y, (_currentLine - 1) * _lineDistance);
         }
     }
 }
