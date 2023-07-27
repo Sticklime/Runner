@@ -1,15 +1,17 @@
 ﻿using System;
+using CodeBase.Logic.Ability;
 
 namespace CodeBase.AbilityDecorator.Stats
 {
     [Serializable]
-    public class SuperJumpAbilityStats : IPlayerAbilityStats
+    public class SuperJumpAbilityStats 
     {
         public int JumpForce = 2;
-        public int Level { get; set; } = 0;
-        public int MaxLevel { get; set; } = 3;
-        public bool IsActive { get; set; } = false;
-        public int TimeActive { get; set; } = 0;
-        public int Price { get; set; } = 500;
+        public int Level  = 0;
+        public int MaxLevel= 3;
+        public bool IsBuy  = false;
+        public int TimeActive  = 0;
+        public int Price  = 500;
+        public AbilityType AbilityType = AbilityType.SuperJump;
     }
 }

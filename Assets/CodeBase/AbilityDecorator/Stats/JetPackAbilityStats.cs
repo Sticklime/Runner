@@ -1,15 +1,17 @@
 ﻿using System;
+using CodeBase.Logic.Ability;
 using UnityEngine;
 
 namespace CodeBase.AbilityDecorator.Stats
 {
     [Serializable]
-    public class JetPackAbilityStats : IPlayerAbilityStats
+    public class JetPackAbilityStats 
     {
-        public int Level { get; set; } = 0;
-        public int MaxLevel { get; set; } = 1;
-        public bool IsActive { get; set; } = false;
-        public int TimeActive { get; set; } = 0;
-        public int Price { get; set; } = 800;
+        public int Level = 0;
+        public int MaxLevel = 1;
+        public bool IsBuy = false;
+        public int TimeActive  = 0;
+        public int Price  = 800;
+        public AbilityType AbilityType = AbilityType.JetPack;
     }
 }

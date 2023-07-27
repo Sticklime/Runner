@@ -6,7 +6,7 @@ namespace CodeBase.AbilityDecorator.Stats
     {
         public int Level { get;set; }
         public int MaxLevel { set; get; }
-        public bool IsActive { get; set; }
+        public bool IsBuy { get; set; }
         public int TimeActive { get; set; }
         public int Price { get; set; }
     }

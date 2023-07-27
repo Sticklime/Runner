@@ -8,5 +8,6 @@
         Shield = 3,
         SuperJump = 4,
         JetPack = 5,
+        Speed = 6,
     }
 }

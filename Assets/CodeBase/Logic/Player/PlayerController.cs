@@ -10,6 +10,9 @@ namespace CodeBase.Logic.Player
         [SerializeField] private PlayerMove _playerMove;
         [SerializeField] private MoneyAbility _moneyAbility;
         [SerializeField] private SuperJumpAbility _superJumpAbility;
+        [SerializeField] private ShieldAbility _shieldAbility;
+        [SerializeField] private SpeedAbility _speedAbility;
+        [SerializeField] private JetPackAbility _jetPack;
 
         private int _currentLine = 1;
         private bool _isMoving = false;
@@ -17,7 +20,6 @@ namespace CodeBase.Logic.Player
         private Vector2 _fingerUpPosition;
         private bool _detectSwipe = false;
         private float _minDistanceForSwipe = 20f;
-
 
         private void Update()
         {
@@ -44,8 +46,14 @@ namespace CodeBase.Logic.Player
                 _flashlight.TurnAbility();
             if (Input.GetKeyDown(KeyCode.Alpha2))
                 _moneyAbility.TurnAbility();
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                _shieldAbility.TurnAbility();
             if (Input.GetKeyDown(KeyCode.Alpha4))
+                _speedAbility.TurnAbility();
+            if (Input.GetKeyDown(KeyCode.Alpha5))
                 _superJumpAbility.TurnAbility();
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+                _jetPack.TurnAbility();
         }
 
         public void StarMove() =>

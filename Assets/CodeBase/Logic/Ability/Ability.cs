@@ -5,47 +5,61 @@ namespace CodeBase.Logic.Ability
     public abstract class Ability : MonoBehaviour
     {
         private AbilityUI _abilityUI;
+        private int CountAbility = 0;
+
         public AbilityType AbilityType;
-        public bool IsActive { get; protected set; } = false;
 
         protected float TimeActive;
-
-        private int CountAbility;
+        public bool IsActive { get; protected set; } = false;
 
         public void Construct(AbilityUI abilityUI)
         {
             _abilityUI = abilityUI;
         }
 
-        protected void TimerWork<T>(T component) where T : Behaviour
-        {
-            if (!IsActive)
-            {
-                component.enabled = IsActive;
-                return;
-            }
+        public void Start() =>
+            _abilityUI.SetValueSlider(TimeActive);
 
-            if (TimeActive <= 0)
+        protected void TimerWork<T>(T component = null) where T : Behaviour
+        {
+            if (IsActive == false || TimeActive >= 0)
             {
                 IsActive = false;
-                component.enabled = IsActive;
+                component.enabled = false;
+                return;
             }
-
-            _abilityUI.SetValueSlider(TimeActive);
-            if (TimeActive > 0)
-            {
-                component.enabled = IsActive;
+            else
                 TimeActive -= Time.deltaTime;
-                Debug.Log(TimeActive);
-            }
+
+
+            Debug.Log(TimeActive);
+            _abilityUI.SetCurrentTime(TimeActive);
         }
 
-        public void TurnAbility()
+        protected void TimerWork()
         {
-            if (CountAbility == 0 || IsActive)
+            _abilityUI.gameObject.SetActive(CountAbility > 0 || IsActive);
+
+            if (IsActive == false || TimeActive <= 0)
+            {
+                IsActive = false;
+                return;
+            }
+            else
+                TimeActive -= Time.deltaTime;
+
+            Debug.Log(TimeActive);
+            _abilityUI.SetCurrentTime(TimeActive);
+        }
+
+        public virtual void TurnAbility()
+        {
+            if (CountAbility <= 0 || IsActive)
                 return;
 
             IsActive = true;
+            enabled = true;
+
             RemoveAbility();
         }
 
@@ -55,7 +69,7 @@ namespace CodeBase.Logic.Ability
             _abilityUI.Refresh(CountAbility);
         }
 
-        private void RemoveAbility()
+        protected void RemoveAbility()
         {
             CountAbility--;
             _abilityUI.Refresh(CountAbility);

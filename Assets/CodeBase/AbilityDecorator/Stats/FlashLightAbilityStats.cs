@@ -1,15 +1,16 @@
 ﻿using System;
+using CodeBase.Logic.Ability;
 
 namespace CodeBase.AbilityDecorator.Stats
 {
     [Serializable]
-    public class FlashLightAbilityStats : IPlayerAbilityStats
+    public class FlashLightAbilityStats
     {
-        public int Level { get; set; } = 1;
-        public int MaxLevel { get; set; } = 3;
-        public bool IsActive { get; set; } = true;
-        public int TimeActive { get; set; } = 10;
-        public int Price { get; set; } = 50;
-        public int BatteryCharge = 10;
+        public int Level = 1;
+        public int MaxLevel = 3;
+        public bool IsBuy = true;
+        public int TimeActive = 0;
+        public int Price = 50;
+        public AbilityType AbilityType = AbilityType.Flashlight;
     }
 }

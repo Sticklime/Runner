@@ -1,3 +1,4 @@
+using CodeBase.Logic.Ability;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,9 @@ namespace CodeBase.UILogic
 
         private void Update()
         {
+            if(_player.GetComponentInChildren<SpeedAbility>().IsActive)
+                CountPoint = (int)_player.transform.position.x * 2;
+            
             CountPoint = (int)_player.transform.position.x;
             RefreshData(CountPoint);
 

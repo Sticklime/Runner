@@ -11,6 +11,7 @@ namespace CodeBase.Logic.Player
         [SerializeField] public float _lineDistance = 3f;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private SuperJumpAbility _superJumpAbility;
+        [SerializeField] private PlayerAnimator _playerAnimator;
 
         private float _positionZ;
 
@@ -21,6 +22,8 @@ namespace CodeBase.Logic.Player
 
             transform.position =
                 Vector3.Lerp(transform.position, transform.position + direction, scaledSpeed);
+
+            _playerAnimator.StateFor(AnimatorState.Run);
         }
 
         public void Jump()

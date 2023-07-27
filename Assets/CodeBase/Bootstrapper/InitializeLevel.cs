@@ -28,7 +28,7 @@ namespace CodeBase.Bootstrapper
         }
 
         public void LoadLevel() =>
-            _sceneLoader.Load(_nameGameScene, InitScene);
+            InitScene();
 
         private void InitScene()
         {
