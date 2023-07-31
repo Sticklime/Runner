@@ -6,12 +6,13 @@ namespace CodeBase.Logic.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private GroundChecker _groundCheck;
-        [SerializeField] private FlashlightLogic _flashlight;
+        [SerializeField] private FlashlightAbility _flashlight;
         [SerializeField] private PlayerMove _playerMove;
         [SerializeField] private MoneyAbility _moneyAbility;
         [SerializeField] private SuperJumpAbility _superJumpAbility;
         [SerializeField] private ShieldAbility _shieldAbility;
         [SerializeField] private SpeedAbility _speedAbility;
+        [SerializeField] private MagnetAbility _magnetAbility;
         [SerializeField] private JetPackAbility _jetPack;
 
         private int _currentLine = 1;
@@ -53,14 +54,10 @@ namespace CodeBase.Logic.Player
             if (Input.GetKeyDown(KeyCode.Alpha5))
                 _superJumpAbility.TurnAbility();
             if (Input.GetKeyDown(KeyCode.Alpha6))
+                _magnetAbility.TurnAbility();
+            if (Input.GetKeyDown(KeyCode.Alpha7))
                 _jetPack.TurnAbility();
         }
-
-        public void StarMove() =>
-            _isMoving = true;
-
-        public void StopMove() =>
-            _isMoving = false;
 
         void DetectSwipe()
         {
@@ -96,5 +93,11 @@ namespace CodeBase.Logic.Player
                     _playerMove.Jump();
             }
         }
+
+        public void StopMove() =>
+            _isMoving = false;
+
+        public void StarMove() =>
+            _isMoving = true;
     }
 }

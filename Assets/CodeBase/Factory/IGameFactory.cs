@@ -8,6 +8,7 @@ namespace CodeBase.Factory
         public void Load();
         public GameObject CreateMenu();
         public GameObject CreateHud();
+        public GameObject CreateAbility(AbilityType abilityType, Transform at);
         public GameObject CreatePlayer();
     }
 }

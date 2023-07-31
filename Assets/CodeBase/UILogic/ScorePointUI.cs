@@ -8,18 +8,22 @@ namespace CodeBase.UILogic
     {
         [SerializeField] private TMP_Text _scoreText;
 
+        private SpeedAbility _speedAbility;
         private GameObject _player;
 
         public int CountPoint { get; private set; }
 
-        public void Construct(GameObject player) => 
+        public void Construct(GameObject player, SpeedAbility speedAbility)
+        {
             _player = player;
+            _speedAbility = speedAbility;
+        }
 
         private void Update()
         {
-            if(_player.GetComponentInChildren<SpeedAbility>().IsActive)
+            if (_speedAbility.IsActive)
                 CountPoint = (int)_player.transform.position.x * 2;
-            
+
             CountPoint = (int)_player.transform.position.x;
             RefreshData(CountPoint);
 

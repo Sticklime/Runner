@@ -9,5 +9,6 @@
         SuperJump = 4,
         JetPack = 5,
         Speed = 6,
+        Magnet = 7,
     }
 }

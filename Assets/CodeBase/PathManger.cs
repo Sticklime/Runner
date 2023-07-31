@@ -6,5 +6,6 @@
         public const string MenuPath = "Prefabs/UI/Menu/Menu";
         public const string HudPath = "Prefabs/UI/Hud/Hud";
         public const string PlayerPath = "Prefabs/Player/Player";
+        public const string CoinPath = "Prefabs/Coin/Coin";
     }
 }

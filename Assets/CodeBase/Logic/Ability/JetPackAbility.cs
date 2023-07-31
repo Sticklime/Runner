@@ -7,19 +7,14 @@ namespace CodeBase.Logic.Ability
     {
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private PlayerAnimator _playerAnimator;
-
-        private void Awake() =>
-            TimeActive = Init.Instance.playerData.JetPackAbility.TimeActive;
-
+        
         private void Update()
         {
-            TimerWork();
-
-            if (IsActive)
-            {
-                _playerController.StopMove();
-                _playerAnimator.StateFor(AnimatorState.JetPack);
-            }
+            if (!IsActive) 
+                return;
+            
+            _playerController.StopMove();
+            _playerAnimator.StateFor(AnimatorState.JetPack);
         }
     }
 }

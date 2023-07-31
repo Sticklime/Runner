@@ -4,6 +4,7 @@ using CodeBase.Factory;
 using CodeBase.Logic.Ability;
 using CodeBase.Logic.Coin;
 using CodeBase.Logic.Player;
+using CodeBase.Pool;
 using CodeBase.SceneLoaderServices;
 using CodeBase.UILogic;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace CodeBase.Bootstrapper
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
 
+        private List<CoinLogic> _coinContainer;
         private GameObject _mainMenu;
         private GameObject _player;
         private GameObject _hud;
@@ -34,15 +36,32 @@ namespace CodeBase.Bootstrapper
         {
             InitHud();
             InitPlayer();
+            InitChunkPlayer();
             InitMainMenu();
             InitCoin();
+            InitAbility();
+        }
+
+        private void InitChunkPlayer()
+        {
+            Object.FindObjectOfType<ChunkPlacer>().Construct(_player.transform);
+        }
+
+        private void InitAbility()
+        {
+            foreach (SpawnMarkerAbility abilitySpawn in Object.FindObjectsOfType<SpawnMarkerAbility>())
+                _gameFactory.CreateAbility(abilitySpawn.GetTypeAbility(), abilitySpawn.transform);
         }
 
         private void InitCoin()
         {
+            ObjectPool objectPool = new ObjectPool();
+            _coinContainer =
+                objectPool.LoadObject<CoinLogic>(Resources.Load<GameObject>(PathManger.CoinPath), 40);
+
             ScoreCoinUI scoreCoin = _hud.GetComponentInChildren<ScoreCoinUI>();
 
-            foreach (CoinLogic coin in Object.FindObjectsOfType<CoinLogic>())
+            foreach (CoinLogic coin in _coinContainer)
                 coin.Construct(scoreCoin);
         }
 
@@ -69,7 +88,8 @@ namespace CodeBase.Bootstrapper
             ScoreCoinUI scoreCoin = _hud.GetComponentInChildren<ScoreCoinUI>();
             _player.GetComponent<PlayerDeath>().Construct(looseWindow, scoreCoin);
 
-            _hud.GetComponentInChildren<ScorePointUI>().Construct(_player);
+            _hud.GetComponentInChildren<ScorePointUI>()
+                .Construct(_player, _player.GetComponentInChildren<SpeedAbility>());
 
             List<AbilityUI> abilityUI = _hud.GetComponentsInChildren<AbilityUI>().ToList();
             foreach (Ability ability in _player.GetComponentsInChildren<Ability>())

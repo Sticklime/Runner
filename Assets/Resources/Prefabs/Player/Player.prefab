@@ -181,6 +181,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityType: 1
   _light: {fileID: 8448570839642902400}
+--- !u!1 &1693093676639056003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3908012621822906892}
+  - component: {fileID: 6655382744390711041}
+  - component: {fileID: 3766854194111542709}
+  m_Layer: 0
+  m_Name: MagnetAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3908012621822906892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693093676639056003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8361371406808615298}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6655382744390711041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693093676639056003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9944e9fee09e450997ab90e21e2638e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityType: 7
+--- !u!136 &3766854194111542709
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693093676639056003}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.62
+  m_Height: 7.2400017
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.76094437, z: 0}
 --- !u!1 &1800293074784962460
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +531,7 @@ Transform:
   - {fileID: 6253554325234121536}
   - {fileID: 3163743541123711677}
   - {fileID: 3224925876857131282}
+  - {fileID: 3908012621822906892}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -609,6 +679,7 @@ MonoBehaviour:
   _superJumpAbility: {fileID: 8590400212187761702}
   _shieldAbility: {fileID: 6460359396940165632}
   _speedAbility: {fileID: 4733879126323799302}
+  _magnetAbility: {fileID: 6655382744390711041}
   _jetPack: {fileID: 4022096147275448497}
 --- !u!114 &2600125154934705875
 MonoBehaviour:

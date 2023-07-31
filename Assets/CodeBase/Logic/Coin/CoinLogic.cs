@@ -1,3 +1,4 @@
+using System;
 using CodeBase.Logic.Ability;
 using CodeBase.Logic.Player;
 using CodeBase.UILogic;
@@ -16,21 +17,21 @@ namespace CodeBase.Logic.Coin
 
         private void OnTriggerEnter(Collider collision)
         {
-            if (collision.TryGetComponent(out PlayerController playerController))
+            if (!collision.TryGetComponent(out PlayerController playerController))
+                return;
+            
+            gameObject.SetActive(false);
+                
+            if (collision.GetComponentInChildren<MoneyAbility>().IsActive)
             {
-                gameObject.SetActive(false);
-                if (collision.GetComponentInChildren<MoneyAbility>().IsActive)
-                {
-                    AddPoints(_reward * 2);
-                    return;
-                }
-                AddPoints(_reward);
+                AddPoints(_reward * 2);
+                return;
             }
+
+            AddPoints(_reward);
         }
 
-        private void AddPoints(int reward)
-        {
+        private void AddPoints(int reward) =>
             _scoreCoinUI.AddCoin(reward);
-        }
     }
 }
